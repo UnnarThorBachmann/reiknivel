@@ -48,7 +48,7 @@ const styles = {
     borderWidth: '1px',
     borderRadius: '10px',
     width: '60%',   
-    height: '600px',
+    height: '800px',
     backgroundColor: amber800
   }
 };
@@ -61,7 +61,7 @@ class App extends Component {
   
   render() {
     return (
-      <div style={{backgroundImage: `url(${img})`,backgroundRepeat  : 'repeat', backgroundPosition: 'left',height: '100vh'}}>
+      <div style={{backgroundImage: `url(${img})`,backgroundRepeat  : 'repeat', backgroundPosition: 'left',height: '200vh'}}>
       <MuiThemeProvider muiTheme={muiTheme}>
       <div>
       <AppBar

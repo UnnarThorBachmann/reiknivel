@@ -15,6 +15,7 @@ import Remove from 'material-ui/svg-icons/content/remove';
 
 import IconButton from 'material-ui/IconButton';
 import {Pie} from 'react-chartjs-2';
+import Endurtaka from 'material-ui/svg-icons/action/autorenew';
 
 
 let litrar = [];
@@ -234,17 +235,17 @@ class VStepper extends React.Component {
           </Step>
         </Stepper>
         {finished && (
-          <div>
-            <a
-              href="/"
-              onClick={(event) => {
-                event.preventDefault();
-                this.setState({stepIndex: 0, finished: false});
-              }}
-            >
-              smella
-            </a> <span>Endurtaka</span>
-             
+            <div>
+              <IconButton
+                iconStyle={{color: '#000000'}}
+                onClick={(event)=>{
+                  event.preventDefault();
+                  this.setState({stepIndex: 0, finished: false});
+                }}
+                tooltip={'Endurtaka'}
+              >
+                <Endurtaka/>
+              </IconButton>
             </div>
         )}
 
@@ -252,8 +253,9 @@ class VStepper extends React.Component {
       {finished && 
         <div style={{display: 'flex',
                       flexWrap: 'wrap',
-                      justifyContent: 'flex-start'}}>
+                      justifyContent: 'flex-start', padding: '1%'}}>
         <div style={{width: '50%'}}>
+        <h4>Forsendur: </h4>
         <table>
           <tbody>
           <tr>
@@ -300,7 +302,8 @@ class VStepper extends React.Component {
         </table>
        
         </div>
-        <div style={{width: '50%'}}>
+        <div style={{width: '40%'}}>
+          <h4>{`Ársneysla ${(billKg + straetoKg + flugKg).toFixed(1).toString().replace('.',',')} kg`}</h4>
           <Pie 
                       data={{
                       labels: [ 'Bíll',
@@ -328,8 +331,8 @@ class VStepper extends React.Component {
                       }
 
                       } 
-                      width={1}
-                      height={1}
+                      width={0.8}
+                      height={0.8}
                       options={{
                         maintainAspectRatio: false
                       }}
