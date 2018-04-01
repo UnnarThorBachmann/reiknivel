@@ -6,7 +6,7 @@ import {
   StepContent,
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
-import {amber800} from 'material-ui/styles/colors';
+import {amber800, red500,blue500,green500} from 'material-ui/styles/colors';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
@@ -14,6 +14,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import Remove from 'material-ui/svg-icons/content/remove';
 
 import IconButton from 'material-ui/IconButton';
+import {Pie} from 'react-chartjs-2';
 
 
 let litrar = [];
@@ -149,9 +150,6 @@ class VStepper extends React.Component {
         return p + kmflug*0.280;
     },0)
 
-   
-    const flugVegalengd = 0;
-    const billVegalengd = 0;
     return (
       <div>
       <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
@@ -252,9 +250,10 @@ class VStepper extends React.Component {
 
       </div>
       {finished && 
-        <div>
-       
-
+        <div style={{display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'flex-start'}}>
+        <div style={{width: '50%'}}>
         <table>
           <tbody>
           <tr>
@@ -300,6 +299,42 @@ class VStepper extends React.Component {
         </tbody>
         </table>
        
+        </div>
+        <div style={{width: '50%'}}>
+          <Pie 
+                      data={{
+                      labels: [ 'Bíll',
+                                'Strætó',
+                                'Flug',
+                              ],
+                              datasets: [{
+                                  data: [billKg.toFixed(1),
+                                          straetoKg.toFixed(1),
+                                          flugKg.toFixed(1)
+                                  ],
+                                  backgroundColor: [
+                                    red500,
+                                    blue500,
+                                    green500,
+                                  ],
+                                  hoverBackgroundColor: [
+                                    red500,
+                                    blue500,
+                                    green500,
+                                    
+                                  ]
+                                }]
+
+                      }
+
+                      } 
+                      width={1}
+                      height={1}
+                      options={{
+                        maintainAspectRatio: false
+                      }}
+                    />
+        </div>
         </div>
       }
       </div>
