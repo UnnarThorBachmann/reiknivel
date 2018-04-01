@@ -23,11 +23,10 @@ const muiTheme = getMuiTheme({
   },
   
   floatingActionButton:   {
-    color: lightGreen700
+    backgroundColor: '#000000',
+    color: '#000000'
   },
-  chip: {
-    backgroundColor: lightGreen100
-  },
+  
   stepper: {
      iconColor: '#000000',
      color: '#000000'
@@ -36,7 +35,7 @@ const muiTheme = getMuiTheme({
     color: '#000000'
   },
   raisedButton: {
-    backgroundColor: '#000000'
+    style: 'default'
   }
 });
 
@@ -44,14 +43,14 @@ const styles = {
   main: {
     marginLeft: '20%',
     marginRight: '1%',
-    marginTop: '5%',
+    marginTop: '1%',
     borderStyle: 'solid',
     paddingTop: '1%',
     paddingBottom: '1%',
     borderWidth: '1px',
     borderRadius: '10px',
     width: '60%',   
-    height: '400px',
+    height: '600px',
     backgroundColor: amber800
   }
 };
