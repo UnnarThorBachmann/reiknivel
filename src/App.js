@@ -29,7 +29,8 @@ const muiTheme = getMuiTheme({
   
   stepper: {
      iconColor: '#000000',
-     color: '#000000'
+     hoveredIconColor: '#000000',
+      inactiveIconColor: '#000000',
   },
   flatButton: {
     color: '#000000'

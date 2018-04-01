@@ -7,7 +7,7 @@ import {
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import {lightGreen700,lightGreen100,lightGreen50,amber800} from 'material-ui/styles/colors';
+import {amber800} from 'material-ui/styles/colors';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
@@ -103,6 +103,13 @@ class VStepper extends React.Component {
       return state.flugferdir.push(state.flugvegalengd);
     })
   }
+
+  delete = () => {
+    this.setState((state)=> {
+      
+      return state.flugferdir.splice(-1,1);
+    })
+  }
   renderStepActions(step) {
     const {stepIndex} = this.state;
     console.log(this.state);
@@ -140,8 +147,8 @@ class VStepper extends React.Component {
     return (
       <div>
       <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
-        <Stepper activeStep={stepIndex} orientation="vertical">
-          <Step>
+        <Stepper activeStep={stepIndex} orientation="vertical" style={{color: '#FFF000'}} disabled={true}>
+          <Step >
             <StepLabel>Bílferðir</StepLabel>
             <StepContent>
               <SelectField
@@ -156,7 +163,6 @@ class VStepper extends React.Component {
               </SelectField>
               <TextField
                 floatingLabelText="Kílómetrar eknir á viku"
-                labelText = "Kílómetrar eknir á viku"
                 floatingLabelStyle={{color: "#000000"}}
                 value={this.state.km}
                 onChange={this.changeKm}
@@ -188,18 +194,25 @@ class VStepper extends React.Component {
                 floatingLabelStyle={{color: '#000000'}}
                 underlineFocusStyle={{borderColor: '#000000'}}
               />
-              <IconButton  
-                style={{marginLeft: '75%',marginRight: 30,marginTop: 5, marginBottom: 5}} 
-                onClick={this.add}
-              >
-                <ContentAdd/>
-              </IconButton>
-              <IconButton  
-                style={{marginLeft: '75%',marginRight: 30,marginTop: 5, marginBottom: 5}} 
-                onClick={this.add}
-              >
-                <Remove/>
-              </IconButton>
+              <div style={{display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'space-around', paddingRight: '30px'}}>
+                
+                <div>
+                <IconButton  
+                  onClick={this.delete}
+                >
+                  <Remove/>
+                </IconButton>
+                </div>
+                <div>
+                  <IconButton  
+                    onClick={this.add}
+                  >
+                    <ContentAdd/>
+                  </IconButton>
+                </div>
+              </div>
               {this.renderStepActions(1)}
             </StepContent>
           </Step>
