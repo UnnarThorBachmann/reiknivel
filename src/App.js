@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {lightGreen700,lightGreen100,lightGreen50,amber800} from 'material-ui/styles/colors';
+import {amber800} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
 import VStepper from './components/stepper.js';
 
 //const img = 'images/pollution.jpg'

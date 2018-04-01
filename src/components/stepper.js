@@ -6,29 +6,19 @@ import {
   StepContent,
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import {amber800} from 'material-ui/styles/colors';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Remove from 'material-ui/svg-icons/content/remove';
 
 import IconButton from 'material-ui/IconButton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+
 
 let litrar = [];
 for (let i = 1; i < 30; i++)
   litrar.push(i);
-let km = []
 
 class VStepper extends React.Component {
 
@@ -41,7 +31,8 @@ class VStepper extends React.Component {
     disabled: false,
     flugvegalengd: '0',
     flugferdir: [],
-    kmStraeto: "0"
+    kmStraeto: "0",
+    
   };
 
   handleNext = () => {
@@ -112,7 +103,6 @@ class VStepper extends React.Component {
   }
   renderStepActions(step) {
     const {stepIndex} = this.state;
-    console.log(this.state);
     return (
       <div style={{margin: '12px 0'}}>
         <RaisedButton
@@ -128,7 +118,6 @@ class VStepper extends React.Component {
         {step > 0 && (
           <RaisedButton
             label="Aftur"
-            disabled={stepIndex === 0}
             disableTouchRipple={true}
             disableFocusRipple={true}
             onClick={this.handlePrev}
@@ -142,8 +131,27 @@ class VStepper extends React.Component {
   }
 
   render() {
-    const {finished, stepIndex} = this.state;
+    const {finished, stepIndex,kmStraeto,km,litrar,flugferdir,biltegund} = this.state;
+    console.log(this.state);
 
+    const straetoKg = parseFloat(kmStraeto)*0.056*52;
+    const billKg = (biltegund === 1)?parseFloat(km)*parseFloat(litrar)/100*2.35*52: parseFloat(km)*parseFloat(litrar)/100*2.73*52;
+    let flugKg = flugferdir.reduce(function(p,c) {
+      const kmflug = parseFloat(c);
+      console.log(kmflug);
+      if (kmflug <= 250)
+        return p + kmflug*0.154;
+      else if (kmflug <= 500)
+        return p + kmflug*0.174;
+      else if (kmflug <= 750)
+        return p + kmflug*0.191;
+      else
+        return p + kmflug*0.280;
+    },0)
+
+   
+    const flugVegalengd = 0;
+    const billVegalengd = 0;
     return (
       <div>
       <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
@@ -166,7 +174,6 @@ class VStepper extends React.Component {
                 floatingLabelStyle={{color: "#000000"}}
                 value={this.state.km}
                 onChange={this.changeKm}
-                floatingLabelStyle={{color: '#000000'}}
                 floatingLabelFixed={true}
 
                 underlineFocusStyle={{borderColor: '#000000'}}
@@ -176,7 +183,6 @@ class VStepper extends React.Component {
                 floatingLabelStyle={{color: "#000000"}}
                 value={this.state.litrar}
                 onChange={this.changeLitrar}
-                floatingLabelStyle={{color:'#000000'}}
                 underlineFocusStyle={{borderColor: '#000000'}}
               />
               {this.renderStepActions(0)}
@@ -191,7 +197,6 @@ class VStepper extends React.Component {
                 floatingLabelStyle={{color: "#000000"}}
                 value={this.state.flugvegalengd}
                 onChange={this.changeFlugvegalengd}
-                floatingLabelStyle={{color: '#000000'}}
                 underlineFocusStyle={{borderColor: '#000000'}}
               />
               <div style={{display: 'flex',
@@ -224,7 +229,6 @@ class VStepper extends React.Component {
                 floatingLabelStyle={{color: "#000000"}}
                 value={this.state.kmStraeto}
                 onChange={this.changeKmStraeto}
-                floatingLabelStyle={{color: '#000000'}}
                 underlineFocusStyle={{borderColor: '#000000'}}
               />
               {this.renderStepActions(2)}
@@ -234,7 +238,7 @@ class VStepper extends React.Component {
         {finished && (
           <div>
             <a
-              href="#"
+              href="/"
               onClick={(event) => {
                 event.preventDefault();
                 this.setState({stepIndex: 0, finished: false});
@@ -252,6 +256,7 @@ class VStepper extends React.Component {
        
 
         <table>
+          <tbody>
           <tr>
             <th>Samgöngumáti</th>
             <th>Koldíoxíð (kg) á hvern km</th>
@@ -268,7 +273,7 @@ class VStepper extends React.Component {
             <td>Bensínbíll</td>
             <td>2,35</td>
           </tr>
-          <tr selectable={false}>
+          <tr>
             <td>Díselbíll</td>
             <td>2,73</td>
           </tr>
@@ -280,18 +285,19 @@ class VStepper extends React.Component {
             <td>U.þ.b. 250 km</td>
             <td>0,154</td>
           </tr>
-          <tr selectable={false}>
+          <tr>
             <td>u.þ.b. 500 km</td>
             <td>0,174</td>
           </tr>
-          <tr selectable={false}>
+          <tr>
             <td>U.þ.b 750 km</td>
             <td>0,191</td>
           </tr>
-          <tr selectable={false}>
+          <tr>
             <td>Lengra en 1000 km</td>
             <td>0,280</td>
           </tr>
+        </tbody>
         </table>
        
         </div>
